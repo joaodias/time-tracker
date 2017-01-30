@@ -1,0 +1,30 @@
+version: '2'
+
+services:
+    postgres:
+        build:
+            context: ./postgres
+            dockerfile: Dockerfile
+        ports:
+            - 5432:5432
+        environment:
+            - POSTGRES_PASSWORD=dMzpXuzT
+            - POSTGRES_DB=TimeTracker
+    golang:
+        build:
+            context: ./backend
+            dockerfile: Dockerfile
+        depends_on:
+            - postgres
+        working_dir: /go/src/github.com/joaodias/time-tracker/backend
+        volumes:
+            - ./backend:/go/src/github.com/joaodias/time-tracker/backend
+        ports:
+            - 4000:4000
+        environment:
+            - DBUSER=postgres
+            - DBKEY=dMzpXuzT
+            - DBNAME=TimeTracker
+            - DBHOST=postgres:5432
+            - PORT=:4000
+        command: bash -c "godep restore && go run main.go"

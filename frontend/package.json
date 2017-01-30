@@ -4,8 +4,10 @@
   "description": "The Time Tracker",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack-dev-server --port 3000",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "author": "João Dias (joaodias.github.io)",
   "license": "ISC",
@@ -20,15 +22,23 @@
     "node-sass": "^3.8.0",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "@kadira/storybook": "^2.21.0"
   },
   "dependencies": {
     "babel-polyfill": "^6.13.0",
     "babel-runtime": "^6.11.6",
+    "electron": "^1.4.13",
+    "googleapis": "^16.1.0",
+    "rc-table": "^5.2.7",
     "react": "^15.3.0",
+    "react-addons-shallow-compare": "^15.4.2",
     "react-dom": "^15.3.0",
     "react-dropdown": "^1.2.0",
     "react-list": "^0.8.0",
+    "react-media-query": "^0.1.0",
+    "react-responsive": "^1.2.5",
+    "react-virtualized": "^8.9.0",
     "webpack": "^1.13.1",
     "whatwg-fetch": "^2.0.1"
   }

@@ -1,4 +1,4 @@
-FROM postgres:9.4
+FROM postgres:latest
 
 RUN mkdir -p /tmp/psql_data/
 

@@ -1,4 +1,5 @@
 body {
+  -webkit-app-region: drag;
   overflow: hidden;
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
@@ -17,16 +18,47 @@ body {
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
+.text-left {
+  text-align: left;
+}
 .center-horizontal {
   position: absolute;
   left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
 }
-.sessions-section {
+.center-vertical {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.active-menu {
+  background: white !important;
+  color: #242e41 !important;
+}
+.inactive-menu {
+  background: #242e41 !important;
+  color: white !important;
+}
+.sidebar {
   position: fixed;
   height: 100%;
   width: 35%;
   left: 0;
   background: #242e41;
+}
+.sessions-section {
+  display: block;
+}
+.sidebar-menu {
+  display: none;
 }
 .timer-section {
   position: fixed;
@@ -39,19 +71,22 @@ body {
   position: absolute;
   top: 100px;
   right: 25px;
-  top: 25px;
+  top: 32px;
 }
 .session-name textarea {
   background: none;
   border-width: 1px;
   border-color: #242e41;
+  border: none;
+  border-bottom: 1px solid;
   resize: none;
   font-size: 14px;
   height: 18px;
   padding: 8px;
-  border-radius: 8px;
+  width: 400px;
 }
 .session-name textarea:focus {
+  border-width: 2px;
   outline: 0;
 }
 .stopwatch {
@@ -63,7 +98,7 @@ body {
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  font-size: 60px;
+  font-size: 48px;
 }
 .controls {
   width: 464px;
@@ -90,7 +125,7 @@ body {
   cursor: pointer;
   margin: 0 auto;
   -webkit-border-radius: 40px;
-  border-radius: 40px;
+  border-radius: 4px;
   border-width: 1px;
   font-size: 20px;
   font-weight: 300;
@@ -119,7 +154,7 @@ body {
   cursor: pointer;
   margin: 0 auto;
   -webkit-border-radius: 40px;
-  border-radius: 40px;
+  border-radius: 4px;
   border-width: 1px;
   font-size: 20px;
   font-weight: 300;
@@ -152,7 +187,7 @@ body {
   cursor: pointer;
   margin: 0 auto;
   -webkit-border-radius: 40px;
-  border-radius: 40px;
+  border-radius: 4px;
   border-width: 1px;
   font-size: 20px;
   font-weight: 300;
@@ -185,7 +220,7 @@ body {
   cursor: pointer;
   margin: 0 auto;
   -webkit-border-radius: 40px;
-  border-radius: 40px;
+  border-radius: 4px;
   border-width: 1px;
   font-size: 20px;
   font-weight: 300;
@@ -218,7 +253,7 @@ body {
   cursor: pointer;
   margin: 0 auto;
   -webkit-border-radius: 40px;
-  border-radius: 40px;
+  border-radius: 4px;
   border-width: 1px;
   font-size: 20px;
   font-weight: 300;
@@ -336,4 +371,223 @@ body {
   padding-left: 0px;
   text-decoration: none;
   float: left;
+}
+.login {
+  background: #242e41;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+}
+.auth-error span {
+  color: #e35e62;
+  margin-top: 60px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.google-login {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  height: 56px;
+  width: 250px;
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_google.png) no-repeat;
+  background-position-y: center;
+  background-position-x: 10px;
+  border-radius: 10px;
+  border: 1px solid white;
+  color: white;
+  padding-left: 24px;
+  font-size: 18px;
+  cursor: pointer;
+}
+.google-login:focus {
+  outline: 0;
+}
+.gcalendar {
+  position: absolute;
+  width: 300px;
+  height: 50px;
+  top: 100px;
+  left: 25px;
+  top: 25px;
+  cursor: pointer;
+}
+.gcalendar img {
+  width: 50px;
+}
+.gcalendar span {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  left: 75px;
+  font-size: 14px;
+  color: #242e41;
+  opacity: 0.5;
+}
+@media (max-width: 600px) {
+  .sidebar {
+    width: 20%;
+  }
+  .sessions-section-sidebar {
+    display: none;
+  }
+  .sessions-section-main {
+    position: absolute;
+    width: 80%;
+    background: white;
+    height: 100%;
+    right: 0;
+  }
+  .session-name {
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+    width: 80%;
+  }
+  .session-name textarea {
+    width: 100%;
+  }
+  .sessions-label {
+    color: #242e41;
+  }
+  .sessions-list {
+    left: 0;
+    top: 71px;
+    width: 100%;
+  }
+  .sessions-list-item {
+    width: 60%;
+  }
+  .sessions-list-item li {
+    padding: 10px;
+    color: #242e41;
+  }
+  .electron-sessions {
+    color: #242e41;
+    padding: 6%;
+    width: 88%;
+  }
+  .Dropdown-root .Dropdown-control {
+    color: #242e41;
+    border: 1px solid #242e41;
+  }
+  .Dropdown-root .Dropdown-menu {
+    color: #242e41;
+    background-color: white;
+    border: 1px solid #242e41;
+  }
+  .Dropdown-root .Dropdown-option:hover {
+    background: #242e41;
+    color: white;
+  }
+  .sidebar-menu {
+    display: block;
+    padding-top: 20px;
+  }
+  .sidebar-menu .buttons-list {
+    padding: 0;
+  }
+  .sidebar-menu .buttons-list .menu-buttons {
+    font-size: 24px;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    width: 80px;
+    height: 30px;
+    cursor: pointer;
+    margin: 0 auto;
+    -webkit-border-radius: 40px;
+    border-radius: 4px;
+    border-width: 1px;
+    font-size: 20px;
+    font-weight: 300;
+    text-align: center;
+    -o-text-overflow: clip;
+    text-overflow: clip;
+    letter-spacing: 1px;
+    margin: 10px;
+    background: rgba(0, 0, 0, 0);
+  }
+  .sidebar-menu .buttons-list .menu-buttons:focus {
+    outline: 0;
+  }
+  .sidebar-menu .buttons-list .menu-buttons:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .sidebar-menu .buttons-list .menu-buttons button {
+    color: white;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    margin: 0 auto;
+    -webkit-border-radius: 40px;
+    border-radius: 40px;
+    border-width: 1px;
+    background: transparent;
+    height: 28px;
+    width: 68px;
+  }
+  .sidebar-menu .buttons-list .menu-buttons button:hover {
+    background: white;
+    color: #242e41;
+  }
+  .sidebar-menu .buttons-list .menu-buttons button:focus {
+    outline: 0;
+  }
+  .timer-section {
+    background: white;
+    width: 80%;
+  }
+  .stopwatch {
+    font-size: 32px;
+  }
+  .controls {
+    width: 80%;
+    top: 60%;
+    font-size: 20px;
+  }
+  .controls .start-btn {
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-size: 18px;
+  }
+  .controls .stop-btn {
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-size: 18px;
+  }
+  .controls .reset-btn {
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-size: 18px;
+  }
+  .controls .save-btn {
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-size: 18px;
+  }
 }

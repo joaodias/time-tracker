@@ -62,7 +62,7 @@ func TestGetAllRowScanFailed(t *testing.T) {
 	mockDatabaseTimeSessionRepository.DatabaseHandler = mockDatabaseHandler
 	timeSessions, err := mockDatabaseTimeSessionRepository.GetAll(interfaces.Day)
 	assert.True(t, mockDatabaseHandler.QueryCalled)
-	assert.NotNil(t, err)
+	assert.Nil(t, err)
 	assert.Equal(t, mocks.ScanError, err.Error())
 	assert.Nil(t, timeSessions)
 }

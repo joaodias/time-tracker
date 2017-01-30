@@ -10,10 +10,13 @@ import (
 // it makes sense since the domain entities should just be afected by the
 // interactor and not by the outter layers.
 type TimeSession struct {
-	ID        string `json:"id"`
-	Name      string `json:"name"`
-	Duration  int    `json:"duration"`
-	CreatedAt string `json:"createdAt"`
+	ID               string `json:"id"`
+	Name             string `json:"name"`
+	Duration         int    `json:"duration"`
+	UserID           string `json:"userId"`
+	WantCalendar     bool   `json:"wantCalendar"`
+	InitialTimestamp string `json:"initialTimestamp"`
+	CreatedAt        string `json:"createdAt"`
 }
 
 // TimeSessionInteractor handles the time session use cases providing it with
@@ -29,11 +32,14 @@ type Logger interface {
 }
 
 // New creates a new time tracker session in the repository.
-func (interactor *TimeSessionInteractor) New(name string, duration int) (*TimeSession, error) {
+func (interactor *TimeSessionInteractor) New(name string, duration int, userID string, wantCalendar bool, initialTimestamp string) (*TimeSession, error) {
 	domainTimeSession := domain.TimeSession{
-		ID:       uuid.New(),
-		Name:     name,
-		Duration: duration,
+		ID:               uuid.New(),
+		Name:             name,
+		Duration:         duration,
+		UserID:           userID,
+		WantCalendar:     wantCalendar,
+		InitialTimestamp: initialTimestamp,
 	}
 	err := interactor.TimeSessionRepository.Store(domainTimeSession)
 	if err != nil {
@@ -41,15 +47,18 @@ func (interactor *TimeSessionInteractor) New(name string, duration int) (*TimeSe
 		return nil, err
 	}
 	return &TimeSession{
-		ID:       domainTimeSession.ID,
-		Name:     domainTimeSession.Name,
-		Duration: domainTimeSession.Duration,
+		ID:               domainTimeSession.ID,
+		Name:             domainTimeSession.Name,
+		Duration:         domainTimeSession.Duration,
+		UserID:           domainTimeSession.UserID,
+		WantCalendar:     domainTimeSession.WantCalendar,
+		InitialTimestamp: domainTimeSession.InitialTimestamp,
 	}, nil
 }
 
 // List lists the time tracker sessions in the repository.
-func (interactor *TimeSessionInteractor) List(period string) ([]*TimeSession, error) {
-	domainTimeSessions, err := interactor.TimeSessionRepository.GetAll(period)
+func (interactor *TimeSessionInteractor) List(period string, userID string) ([]*TimeSession, error) {
+	domainTimeSessions, err := interactor.TimeSessionRepository.GetAll(period, userID)
 	if err != nil {
 		interactor.Logger.Log(err.Error())
 		return nil, err
@@ -60,6 +69,7 @@ func (interactor *TimeSessionInteractor) List(period string) ([]*TimeSession, er
 			ID:        domainTimeSession.ID,
 			Name:      domainTimeSession.Name,
 			Duration:  domainTimeSession.Duration,
+			UserID:    domainTimeSession.UserID,
 			CreatedAt: domainTimeSession.CreatedAt,
 		}
 	}
